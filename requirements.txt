@@ -1,0 +1,19 @@
+# core (enough for the CLI, offline demo and tests)
+requests>=2.31
+pydantic>=2.5
+numpy>=1.26
+scikit-learn>=1.3
+pypdf>=4.0
+pandas>=2.0
+
+# UI
+streamlit>=1.32
+
+# recommended: neural embeddings + cross-encoder reranking (falls back to LSA / LLM reranking without it)
+sentence-transformers>=2.7
+
+# dev
+pytest>=8.0
+
+# optional: run the same graph on LangGraph (set RA_USE_LANGGRAPH=1)
+# langgraph>=0.2

@@ -1,0 +1,20 @@
+{
+  "_note": "Offline benchmark over the fictional demo papers (used with --offline).",
+  "items": [
+    {
+      "question": "How do federated gradient boosting methods trade off privacy, accuracy and communication cost?",
+      "gold_titles": [
+        "Horizontal Federated Gradient Boosting with Secure Histogram Aggregation",
+        "Differentially Private Federated XGBoost for Predictive Maintenance",
+        "Quantised Gradient Sharing for Federated Decision Trees on Edge Devices"
+      ]
+    },
+    {
+      "question": "What privacy attacks and defences matter for federated tree ensembles used in remaining useful life prediction?",
+      "gold_titles": [
+        "Membership Inference Attacks on Federated Tree Ensembles",
+        "Benchmarking Privacy-Preserving Tree Models for Remaining Useful Life Estimation"
+      ]
+    }
+  ]
+}

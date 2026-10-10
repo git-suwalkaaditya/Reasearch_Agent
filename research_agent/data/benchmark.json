@@ -1,0 +1,32 @@
+{
+  "_note": "Small starter benchmark. gold_titles are papers a competent review should surface; add your own questions and expected papers.",
+  "items": [
+    {
+      "question": "How does retrieval-augmented generation improve knowledge-intensive NLP tasks, and how does dense retrieval compare with sparse retrieval?",
+      "gold_titles": [
+        "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "Dense Passage Retrieval for Open-Domain Question Answering"
+      ]
+    },
+    {
+      "question": "What privacy-utility trade-offs arise when training deep networks with differential privacy and federated learning?",
+      "gold_titles": [
+        "Deep Learning with Differential Privacy",
+        "Communication-Efficient Learning of Deep Networks from Decentralized Data"
+      ]
+    },
+    {
+      "question": "How do language-model agents combine reasoning, acting and self-reflection to solve multi-step tasks?",
+      "gold_titles": [
+        "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "Reflexion: Language Agents with Verbal Reinforcement Learning"
+      ]
+    },
+    {
+      "question": "What federated learning frameworks exist for gradient boosted decision trees, and how close to lossless are they?",
+      "gold_titles": [
+        "SecureBoost: A Lossless Federated Learning Framework"
+      ]
+    }
+  ]
+}

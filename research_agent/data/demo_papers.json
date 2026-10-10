@@ -1,0 +1,147 @@
+{
+  "_note": "FICTIONAL demo papers used only for offline mode and tests. They are not real publications.",
+  "papers": [
+    {
+      "paper_id": "demo:0001",
+      "title": "Horizontal Federated Gradient Boosting with Secure Histogram Aggregation",
+      "authors": ["Asha Rao", "Kenji Mori", "Lena Fischer"],
+      "year": 2021,
+      "venue": "Demo Workshop on Private ML (fictional)",
+      "abstract": "We study horizontal federated learning for gradient boosting decision trees, where clients share the feature space but hold different samples. Clients send gradient histograms protected by secure aggregation so the server never sees individual client statistics. On five tabular benchmarks the federated model reaches accuracy within 0.8 percent of centralised XGBoost.",
+      "sections": [
+        {"section": "Introduction", "text": "Gradient boosting decision trees are the dominant model family for tabular data in industry. Federated training of boosted trees is harder than for neural networks because split finding needs global gradient statistics rather than averaged weights. We focus on the horizontal setting where many clients hold different samples with the same features."},
+        {"section": "Method", "text": "Each client computes first and second order gradient histograms over quantile bins for every feature. Histograms are masked with pairwise random masks so that the server can only recover their sum, which is sufficient to evaluate candidate splits. Quantile bin boundaries are agreed in a one-time sketch protocol before training starts."},
+        {"section": "Experiments", "text": "On five public tabular benchmarks the federated model reaches accuracy within 0.8 percent of centralised XGBoost with 10 clients. Communication cost grows linearly with the number of bins, and using 32 bins instead of 256 reduced traffic by 87 percent with an accuracy drop of only 0.3 percent. Training time increased by a factor of 2.4 compared with centralised training because of the masking rounds."},
+        {"section": "Limitations", "text": "Our protocol assumes an honest-but-curious server and does not protect against clients that collude with the server. The released split thresholds and leaf values can still leak information about the training data, which we do not formally bound."},
+        {"section": "Conclusion", "text": "Secure histogram aggregation makes horizontal federated boosting practical with near-centralised accuracy, but formal privacy guarantees for the released model remain an open question."}
+      ]
+    },
+    {
+      "paper_id": "demo:0002",
+      "title": "Differentially Private Federated XGBoost for Predictive Maintenance",
+      "authors": ["Marta Silva", "Ravi Kumar"],
+      "year": 2023,
+      "venue": "Demo Conference on Industrial AI (fictional)",
+      "abstract": "We combine federated gradient boosting with differential privacy to predict remaining useful life of turbofan engines held by different operators. Gaussian noise is added to gradient histograms before aggregation. With a privacy budget of epsilon equal to 8 the RMSE increases by 6 percent relative to the non-private federated model.",
+      "sections": [
+        {"section": "Introduction", "text": "Engine operators are reluctant to share run-to-failure data because it reveals fleet utilisation and maintenance practice. Federated learning lets operators train a shared remaining useful life model without moving raw sensor data. However, model updates themselves can leak information, which motivates differential privacy."},
+        {"section": "Method", "text": "Each operator adds calibrated Gaussian noise to its gradient and hessian histograms before secure aggregation, giving record-level differential privacy per boosting round. The total privacy budget is tracked with a moments accountant across all trees. Gradients are clipped to a fixed norm so that the sensitivity of each histogram is bounded."},
+        {"section": "Experiments", "text": "On a turbofan degradation benchmark with four operators, the non-private federated model achieved RMSE within 2 percent of centralised training. With a privacy budget of epsilon equal to 8 the RMSE increased by 6 percent, and with epsilon equal to 1 the RMSE increased by 31 percent. Shallower trees of depth 4 were more robust to noise than trees of depth 8."},
+        {"section": "Limitations", "text": "Strong privacy budgets below epsilon equal to 2 caused large accuracy losses, which limits deployment where strict guarantees are required. We evaluated only four clients with similar operating conditions, so behaviour under highly non-IID fleets is unknown."},
+        {"section": "Conclusion", "text": "Differentially private federated boosting is viable for predictive maintenance at moderate privacy budgets, but the accuracy cost at strong budgets and non-IID data needs further study."}
+      ]
+    },
+    {
+      "paper_id": "demo:0003",
+      "title": "Vertical Federated Boosting with Homomorphic Encryption",
+      "authors": ["Wei Zhang", "Priya Nair", "Tom Becker"],
+      "year": 2020,
+      "venue": "Demo Symposium on Secure Computation (fictional)",
+      "abstract": "In vertical federated learning, parties hold different features for the same users. We present a boosting protocol in which the label holder encrypts gradients with additively homomorphic encryption and passive parties compute encrypted split statistics. The model is lossless relative to centralised training but encryption makes training 40 times slower.",
+      "sections": [
+        {"section": "Method", "text": "The active party holding labels encrypts gradients and hessians with Paillier encryption and sends them to passive parties. Passive parties aggregate encrypted values into bins for their own features and return encrypted histograms, which the active party decrypts to find the best split. Raw features never leave their owners."},
+        {"section": "Experiments", "text": "The protocol is lossless: accuracy is identical to centralised XGBoost on all tested datasets because no approximation is introduced. However, Paillier encryption made training 40 times slower than plaintext training on a dataset with 100 thousand samples. Using 1024-bit keys instead of 2048-bit keys halved runtime."},
+        {"section": "Limitations", "text": "The active party learns which passive party owns each split, and leaf values reveal label information to passive parties in some configurations. The computational overhead of homomorphic encryption limits scalability to very large datasets."}
+      ]
+    },
+    {
+      "paper_id": "demo:0004",
+      "title": "Communication-Efficient Federated Gradient Boosting via Local Tree Ensembles",
+      "authors": ["Elena Petrova", "Samuel Okafor"],
+      "year": 2022,
+      "venue": "Demo Workshop on Efficient ML (fictional)",
+      "abstract": "Instead of sharing histograms for every split, each client trains small tree ensembles locally and the server aggregates them by weighted voting. This reduces communication by two orders of magnitude but accuracy drops by 3 to 5 percent on non-IID partitions.",
+      "sections": [
+        {"section": "Method", "text": "Each client trains a local gradient boosting ensemble on its own data and uploads the trees once per round. The server combines client ensembles by weighting each client by its validation loss. No gradient statistics are exchanged, so communication is independent of the number of samples."},
+        {"section": "Experiments", "text": "Communication was reduced by a factor of 120 compared with histogram-based federated boosting. On IID partitions accuracy was within 1 percent of centralised XGBoost, but on non-IID partitions with label skew accuracy dropped by 3 to 5 percent. Increasing the number of rounds beyond 10 gave no further gains."},
+        {"section": "Limitations", "text": "The approach performs poorly when client data distributions differ strongly, and uploading full trees may reveal more about local data than aggregated histograms. We did not apply differential privacy to the uploaded trees."}
+      ]
+    },
+    {
+      "paper_id": "demo:0005",
+      "title": "Membership Inference Attacks on Federated Tree Ensembles",
+      "authors": ["Hannah Lee", "Diego Alvarez"],
+      "year": 2023,
+      "venue": "Demo Conference on ML Security (fictional)",
+      "abstract": "We show that gradient boosted trees trained with federated protocols remain vulnerable to membership inference. Leaf values and split thresholds allow an attacker to infer whether a record was used for training with up to 71 percent accuracy, and differential privacy with epsilon equal to 4 reduces attack accuracy to near random.",
+      "sections": [
+        {"section": "Introduction", "text": "Federated learning is often presented as privacy-preserving because raw data stays local. However, the final model is shared with all participants and can memorise individual records. Tree ensembles are particularly exposed because leaves can isolate small groups of samples."},
+        {"section": "Experiments", "text": "Against models trained with secure histogram aggregation but no differential privacy, our attack inferred membership with up to 71 percent accuracy, compared with 50 percent for random guessing. Adding differential privacy with epsilon equal to 4 reduced attack accuracy to 53 percent. Deeper trees and smaller minimum leaf sizes increased vulnerability."},
+        {"section": "Limitations", "text": "We consider only black-box access to the final model; attacks that observe intermediate training messages could be stronger. The trade-off between attack resistance and accuracy for regression tasks such as remaining useful life prediction was not studied."}
+      ]
+    },
+    {
+      "paper_id": "demo:0006",
+      "title": "Non-IID Robust Federated Boosting with Adaptive Client Weighting",
+      "authors": ["Carlos Mendes", "Yuki Tanaka"],
+      "year": 2024,
+      "venue": "Demo Workshop on Federated Learning (fictional)",
+      "abstract": "Federated boosting degrades when client data are non-IID. We propose adaptive client weighting based on gradient similarity, which recovers most of the accuracy lost under feature and label skew, closing 70 percent of the gap to centralised training.",
+      "sections": [
+        {"section": "Method", "text": "At every boosting round the server estimates how similar each client gradient distribution is to the global distribution and down-weights outlier clients when aggregating histograms. The weights are recomputed every round so clients whose data become useful later are not permanently ignored."},
+        {"section": "Experiments", "text": "Under strong label skew, standard federated boosting lost 6.5 percent accuracy relative to centralised training, while adaptive weighting reduced the loss to 1.9 percent, closing about 70 percent of the gap. On IID data the method behaved identically to standard aggregation. The extra computation added less than 5 percent to training time."},
+        {"section": "Limitations", "text": "Our weighting requires the server to observe per-client statistics, which conflicts with secure aggregation and differential privacy. Combining robust weighting with formal privacy guarantees is left for future work."}
+      ]
+    },
+    {
+      "paper_id": "demo:0007",
+      "title": "Benchmarking Privacy-Preserving Tree Models for Remaining Useful Life Estimation",
+      "authors": ["Arjun Mehta", "Sofia Rossi", "Liam O'Brien"],
+      "year": 2025,
+      "venue": "Demo Journal of Prognostics (fictional)",
+      "abstract": "We benchmark centralised, federated, and differentially private tree ensembles for remaining useful life estimation across four turbofan sub-datasets. Federated boosting matched centralised RMSE within 3 percent, while differential privacy at epsilon equal to 2 increased RMSE by 18 percent. No method was evaluated under realistic client dropout.",
+      "sections": [
+        {"section": "Introduction", "text": "Remaining useful life estimation from multivariate sensor data is a core task in prognostics and health management. Privacy-preserving training is attractive for multi-operator fleets, yet existing studies use different datasets, metrics and client splits, which makes comparison difficult."},
+        {"section": "Experiments", "text": "Across the four turbofan sub-datasets, federated boosting matched centralised RMSE within 3 percent. Differential privacy at epsilon equal to 2 increased RMSE by 18 percent on average, with the largest degradation on the sub-dataset with multiple operating conditions. Federated random forests were 9 percent worse than federated boosting."},
+        {"section": "Limitations", "text": "All experiments assumed every client participates in every round; realistic client dropout and stragglers were not evaluated. We also did not measure communication cost, which matters for edge deployment on aircraft."},
+        {"section": "Conclusion", "text": "A standard benchmark with fixed client splits, privacy budgets and communication accounting is needed for privacy-preserving prognostics."}
+      ]
+    },
+    {
+      "paper_id": "demo:0008",
+      "title": "Quantised Gradient Sharing for Federated Decision Trees on Edge Devices",
+      "authors": ["Noor Hassan", "Felix Wagner"],
+      "year": 2024,
+      "venue": "Demo Conference on Edge Computing (fictional)",
+      "abstract": "We quantise gradient histograms to 8 bits before transmission in federated decision tree training on edge devices. Quantisation cuts communication by 75 percent with less than 0.5 percent accuracy loss, and its rounding noise interacts with differential privacy noise in ways we characterise empirically.",
+      "sections": [
+        {"section": "Method", "text": "Clients quantise histogram values to 8-bit integers using stochastic rounding before secure aggregation. The server dequantises the aggregate to evaluate splits. We also study combining quantisation with Gaussian differential privacy noise."},
+        {"section": "Experiments", "text": "Quantisation cut communication by 75 percent with less than 0.5 percent accuracy loss on three tabular benchmarks. When combined with differential privacy at epsilon equal to 4, quantisation added only 0.4 percent additional error because privacy noise dominated rounding noise. Energy use on the edge devices fell by 38 percent."},
+        {"section": "Limitations", "text": "We did not provide a formal analysis of how quantisation affects the differential privacy guarantee. Experiments used at most 20 simulated devices."}
+      ]
+    },
+    {
+      "paper_id": "demo:0101",
+      "title": "Transformer Models for Machine Translation of Low-Resource Languages",
+      "authors": ["Ines Duarte"],
+      "year": 2022,
+      "venue": "Demo NLP Workshop (fictional)",
+      "abstract": "We evaluate transformer translation models on twelve low-resource language pairs and show that back-translation improves BLEU by 4 points on average.",
+      "sections": [
+        {"section": "Experiments", "text": "Back-translation improved BLEU by 4 points on average across twelve language pairs. Larger vocabularies helped only for languages with rich morphology."}
+      ]
+    },
+    {
+      "paper_id": "demo:0102",
+      "title": "Convolutional Networks for Crop Disease Detection from Leaf Images",
+      "authors": ["Mohan Lal", "Grace Kim"],
+      "year": 2021,
+      "venue": "Demo AgriTech Conference (fictional)",
+      "abstract": "We fine-tune convolutional networks to detect crop diseases from smartphone leaf images and reach 92 percent accuracy across 14 crops.",
+      "sections": [
+        {"section": "Experiments", "text": "Fine-tuned MobileNet reached 92 percent accuracy across 14 crops. Accuracy fell to 74 percent on images taken in the field rather than the lab."}
+      ]
+    },
+    {
+      "paper_id": "demo:0103",
+      "title": "Reinforcement Learning for Warehouse Robot Path Planning",
+      "authors": ["Oscar Lind"],
+      "year": 2023,
+      "venue": "Demo Robotics Workshop (fictional)",
+      "abstract": "A deep reinforcement learning planner reduces average path length of warehouse robots by 12 percent compared with A star search in dynamic environments.",
+      "sections": [
+        {"section": "Experiments", "text": "The learned planner reduced average path length by 12 percent compared with A star in environments with moving obstacles. Training required 3 million simulation steps."}
+      ]
+    }
+  ]
+}
