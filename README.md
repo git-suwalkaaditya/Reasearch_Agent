@@ -13,8 +13,6 @@ An LLM agent that takes a research question and returns a literature review in w
 9. **Compares** findings, identifies research gaps, and writes a Markdown report.
 10. **Checks** the report's citations and rewrites it if any are broken.
 
-It is built from scratch with `requests`, `pydantic`, `numpy` and `scikit-learn`, with no agent framework, so every concept is visible in the code.
-
 ---
 
 ## Quick start
