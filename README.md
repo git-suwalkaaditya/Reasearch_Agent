@@ -170,8 +170,4 @@ tests/              # 15 offline tests
 5. **Parallel extraction**: run sub-questions concurrently with `concurrent.futures`.
 6. **Better evaluation**: build a gold set of claim–passage pairs and measure the precision and recall of `verify`.
 
-## A resume bullet you can adapt
 
-> Built an autonomous literature-review agent (state-graph orchestration, LLM tool calling, pydantic-validated structured outputs) that searches arXiv and Semantic Scholar, reads full-text PDFs, retrieves evidence with hybrid BM25 + dense search and reranking, verifies every claim against verbatim quotes, and self-reflects to close evidence gaps. Added SQLite checkpointing for crash recovery and an evaluation suite (citation validity, claim-support rate, retrieval recall, LLM-as-judge).
-
-Add your own numbers from `eval` runs before using it.
